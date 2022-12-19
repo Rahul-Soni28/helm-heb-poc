@@ -1,0 +1,29 @@
+{{- if .Values.configmaps.keyValues }}
+{{- range $i, $val := .Values.configmaps.keyValues }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ $val.name }}
+data:
+  {{- with $val.data }}
+  {{- toYaml . | nindent 2 }}
+  {{- end }}
+{{- end }}
+{{- end -}}
+---
+
+
+{{- if .Values.externalConfigMaps.keyValues }}
+{{- range $i, $val := .Values.externalConfigMaps.keyValues }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ $val.name }}
+data:
+  {{- with $val.data }}
+  {{- toYaml . | nindent 2 }}
+  {{- end }}
+{{- end }}
+{{- end -}}

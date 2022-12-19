@@ -1,0 +1,7 @@
+{{ range $dir, $_ :=  .Files.Glob  "tmp/certs/**.crt" }}
+
+{{ $path := trimSuffix "/key.crt" $dir }}
+{{ $name := trimPrefix "tmp/certs/" $path }}
+name: {{ print $name }}
+
+{{ end }}

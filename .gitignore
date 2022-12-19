@@ -1,0 +1,4 @@
+cm.yaml
+**/*.pem
+**/*.crt
+**/*.cer

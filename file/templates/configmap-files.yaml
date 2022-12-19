@@ -1,0 +1,13 @@
+{{ range $path, $_ :=  .Files.Glob  "tmp/config/files/*" }}
+---
+apiVersion: v1
+kind: ConfigMap
+{{ $file := trimPrefix "tmp/config/files/" $path  -}}
+{{ $ext := $file | ext -}}
+{{ $name := trimSuffix $ext $file -}}
+metadata: 
+  name: {{ print $name }}
+data: 
+  {{ print $file }}: -|
+    {{- $.Files.Get $path | nindent 4 }}
+{{ end }}

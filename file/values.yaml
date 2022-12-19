@@ -1,0 +1,26 @@
+configmaps:
+  keyValues: {}
+#   - name: kv1
+#     data: 
+#       key1: value1
+#       key2: value2
+
+
+externalConfigMaps:
+  keyValues: {}
+#   - name: kv2
+#     data: 
+#       key1: value1
+#       key2: value2
+
+
+secrets:
+  keyValues:
+  # - name: sec-kv
+  #   data: 
+  #     key1: value1
+  #     key2: value2
+
+
+externalSecrets:
+  keyValues: {}
