@@ -2,7 +2,7 @@
 
 SECRET_PATH=tmp/secrets
 FILES=$(ls $SECRET_PATH | grep -e ".js")
-ENVS=$(ls $SECRET_PATH | grep -e ".conf")
+ENVS=$(ls $SECRET_PATH/keyvalues | grep -e ".conf")
 VALUES_FILE=heb-poc/values.yaml
 EXTENDS=extended-values.yaml
 
@@ -13,17 +13,17 @@ else
   sed -i "s@externalSecrets:.*\$@externalSecrets: false@g" $VALUES_FILE
 fi
 
-if [[ $FILES != "" ]]; then
-  echo "secretsFileExternal:" >> $EXTENDS
-  for i in $FILES; do
-  FILE_NAME=$i
-  FILE_ENCODED_CONTENT=$(cat $SECRET_PATH/$FILE_NAME|base64|tr -d "\n")
-  echo -e "- name: $FILE_NAME\n  data:\n    $FILE_NAME: $FILE_ENCODED_CONTENT\n" >> $EXTENDS
-  done
-  echo >> $VALUES_FILE
-  cat $EXTENDS >> $VALUES_FILE
-  rm $EXTENDS
-fi
+# if [[ $FILES != "" ]]; then
+#   echo "secretsFileExternal:" >> $EXTENDS
+#   for i in $FILES; do
+#   FILE_NAME=$i
+#   FILE_ENCODED_CONTENT=$(cat $SECRET_PATH/$FILE_NAME|base64|tr -d "\n")
+#   echo -e "- name: $FILE_NAME\n  data:\n    $FILE_NAME: $FILE_ENCODED_CONTENT\n" >> $EXTENDS
+#   done
+#   echo >> $VALUES_FILE
+#   cat $EXTENDS >> $VALUES_FILE
+#   rm $EXTENDS
+# fi
 
 
 if [[ $ENVS != "" ]]; then
